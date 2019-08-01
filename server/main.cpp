@@ -71,9 +71,15 @@ int main(int argc, char** argv)
 
     unsigned short port_num;
     {
+        if (argc != 2) {
+            std::ostringstream err_sstr;
+            err_sstr << "Usage: " << argv[0] << " PORT_NUMBER";
+            throw std::invalid_argument{err_sstr.str()};
+        }
+
         std::istringstream port_sstr{argv[1]};
 
-        if (argc != 2 || !(port_sstr >> port_num) || port_sstr.good()) {
+        if (!(port_sstr >> port_num) || port_sstr.good()) {
             std::ostringstream err_sstr;
             err_sstr << "Usage: " << argv[0] << " PORT_NUMBER";
             throw std::invalid_argument{err_sstr.str()};

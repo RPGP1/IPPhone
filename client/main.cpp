@@ -72,14 +72,20 @@ int main(int argc, char** argv)
 
     IPPhone::EndPoint peer_endpoint;
     {
+        if (argc != 3) {
+            std::ostringstream err_sstr;
+            err_sstr << "Usage: " << argv[0] << " PEER_ADDRESS PORT_NUMBER";
+            throw std::invalid_argument{err_sstr.str()};
+        }
+
         peer_endpoint.address = asio::ip::address::from_string(argv[1]);
 
         unsigned short port_num;
         std::istringstream port_sstr{argv[2]};
 
-        if (argc != 3 || !(port_sstr >> port_num) || port_sstr.good()) {
+        if (!(port_sstr >> port_num) || port_sstr.good()) {
             std::ostringstream err_sstr;
-            err_sstr << "Usage: " << argv[0] << " PORT_NUMBER";
+            err_sstr << "Usage: " << argv[0] << " PEER_ADDRESS PORT_NUMBER";
             throw std::invalid_argument{err_sstr.str()};
         }
 
