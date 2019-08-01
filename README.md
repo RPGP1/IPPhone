@@ -63,7 +63,6 @@ $> make -j $(nproc)
 ## ディレクトリ構成
 
 ```
-I3
 ├── cereal
 ├── client
 │   ├── CMakeLists.txt
